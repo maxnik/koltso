@@ -14,7 +14,7 @@ module BlogNewsCustomFieldsPatch
 
   module InstanceMethods
     def custom_fields_tabs_with_blog_news_tab
-      custom_fields_tabs_without_blog_tab << {:name => 'BlogCustomField', :partial => 'custom_fields/index', :label => :label_blog_plural} << {:name => 'NewsCustomField', :partial => 'custom_fields/index', :label => :label_news_plural}
+      custom_fields_tabs_without_blog_news_tab << {:name => 'BlogCustomField', :partial => 'custom_fields/index', :label => :label_blog_plural} << {:name => 'NewsCustomField', :partial => 'custom_fields/index', :label => :label_news_plural}
     end
   end
 end

@@ -37,5 +37,5 @@ Redmine::Activity.map do |activity|
 end
 
 class RedmineBlogsHookListener < Redmine::Hook::ViewListener
-  render_on :view_layouts_base_html_head, :inline => "<%= stylesheet_link_tag 'stylesheet', :plugin => 'redmine_blogs' %>"
+  render_on :view_layouts_base_html_head, :inline => "<%= stylesheet_link_tag 'stylesheet', :plugin => 'koltso' %>"
 end
