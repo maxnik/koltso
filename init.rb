@@ -14,11 +14,11 @@ require_dependency 'comment_patch'
 require_dependency 'blog_news_custom_fields_patch'
 require 'blog'
 
-Redmine::Plugin.register :redmine_blogs do
-  name 'Redmine Blogs plugin'
-  author 'A. Chaika'
-  description 'Redmine Blog engine [froked from Kyanh version]'
-  version '0.1.0'
+Redmine::Plugin.register :koltso do
+  name 'Koltso [modified Redmine Blogs plugin]'
+  author 'Max Nikolenko [A. Chaika wrote Redmine Blogs plugin]'
+  description 'Redmine Blog engine 0.1.0 [froked from Kyanh version] with features from social networks'
+  version '0.0.1'
 
   #project_module :blogs do
   permission :manage_blogs, :blogs => [:new, :delete, :edit, :destroy_comment, :destroy]
