@@ -2,7 +2,7 @@
 class BlogsController < ApplicationController
   unloadable
 
-  # helper :custom_fields
+  helper :custom_fields
   helper :attachments
   include AttachmentsHelper
 

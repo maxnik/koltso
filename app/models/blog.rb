@@ -58,5 +58,5 @@ class Blog < ActiveRecord::Base
   def full_description()
     description.gsub(/\{\{more\}\}/mi,"")
   end
-  # acts_as_customizable
+  acts_as_customizable
 end

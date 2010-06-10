@@ -5,7 +5,10 @@
 <p><%= f.text_field :tag_list, :size => 100 %></p>
 <p><%= f.text_area :description, :required => true, :cols => 60, :rows => 15, :class => 'wiki-edit' %></p>
 <p><label><%=l(:label_attachment_plural)%></label><%= render :partial => 'attachments/form' %></p>
-
+<% @blog = Blog.new if @blog.nil? %>
+<% @blog.custom_field_values.each do |value| %>
+  <p><%= custom_field_tag_with_label :blog, value %></p>
+<% end %>
 </div>
 
 <%= wikitoolbar_for 'blog_description' %>

@@ -62,7 +62,13 @@
     <%= textilizable(blog, :short_description) %>
 		<%= link_to(l(:label_read_more), { :action => :show, :id => blog.id }) if blog.has_more? %>
     </div>
-
+    <ul>
+    <% blog.custom_field_values.each do |custom_value| %>
+      <% unless custom_value.value.blank? %>
+        <li><%=h custom_value.custom_field.name %>: <%=h show_value(custom_value) %></li>
+      <% end %>
+    <% end %>
+    </ul>
 <% end %>
 <% end %>
 <p class="pagination"><%= pagination_links_full @blogs_pages %></p>
