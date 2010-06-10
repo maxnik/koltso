@@ -1,0 +1,12 @@
+<%= error_messages_for 'news' %>
+<div class="box tabular">
+<p><%= f.text_field :title, :required => true, :size => 60 %></p>
+<p><%= f.text_area :summary, :cols => 60, :rows => 2 %></p>
+<p><%= f.text_area :description, :required => true, :cols => 60, :rows => 15, :class => 'wiki-edit' %></p>
+<% @news = News.new if @news.nil? %>
+<% @news.custom_field_values.each do |value| %>
+  <p><%= custom_field_tag_with_label :news, value %></p>
+<% end %>
+</div>
+
+<%= wikitoolbar_for 'news_description' %>
