@@ -12,6 +12,7 @@ require_dependency 'acts_as_taggable'
 require_dependency 'application_helper_global_patch'
 require_dependency 'comment_patch'
 require_dependency 'blog_news_custom_fields_patch'
+require_dependency 'user_patch'
 require 'blog'
 
 Redmine::Plugin.register :koltso do
@@ -34,6 +35,7 @@ Redmine::Plugin.register :koltso do
 end
 Redmine::Activity.map do |activity|
   activity.register :blogs
+  activity.register :users
 end
 
 class RedmineBlogsHookListener < Redmine::Hook::ViewListener
