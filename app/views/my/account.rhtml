@@ -27,9 +27,7 @@
 </div>
 
 <%= submit_tag l(:button_save) %>
-</div>
 
-<div class="splitcontentright">
 <h3><%=l(:field_mail_notification)%></h3>
 <div class="box">
 <%= select_tag 'notification_option', options_for_select(@notification_options, @notification_option),
@@ -51,6 +49,30 @@
 <p><%= pref_fields.select :comments_sorting, [[l(:label_chronological_order), 'asc'], [l(:label_reverse_chronological_order), 'desc']] %></p>
 <% end %>
 </div>
+
+</div>
+
+<div class="splitcontentright">
+<fieldset>
+  <legend>Темы</legend>
+<% @themes.each do |theme| %>
+  <p>
+    <%= check_box_tag "user[taxon_ids][]", 
+                      theme.id, @user.taxon_ids.include?(theme.id), :id => "user_taxon_ids_#{theme.id}" %>
+    <%= label(:user, :taxon_ids, theme.name, :value => theme.id) %>
+  </p>
+<% end %>
+</fieldset>
+<fieldset>
+  <legend>Территории</legend>
+<% @territories.each do |territory| %>
+  <p>
+    <%= check_box_tag "user[taxon_ids][]", 
+                      territory.id, @user.taxon_ids.include?(territory.id), :id => "user_taxon_ids_#{territory.id}" %>
+    <%= label(:user, :taxon_ids, territory.name, :value => territory.id) %>
+  </p>
+<% end %>
+</fieldset>
 
 </div>
 <% end %>

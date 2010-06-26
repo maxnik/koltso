@@ -15,6 +15,9 @@ module UserPatch
                     :author => nil
       acts_as_activity_provider :type => 'users', :author_key => nil
       activity_provider_options["users"].delete(:permission)
+
+      has_many :taxonomies, :as => :resource
+      has_many :taxons, :through => :taxonomies
     end
   end
 
