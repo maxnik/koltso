@@ -59,4 +59,7 @@ class Blog < ActiveRecord::Base
     description.gsub(/\{\{more\}\}/mi,"")
   end
   acts_as_customizable
+
+  has_many :taxonomies, :as => :resource
+  has_many :taxons, :through => :taxonomies
 end

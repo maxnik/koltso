@@ -29,3 +29,32 @@
 		});
 	})
 </script>
+
+<div class="splitcontentleft">
+<fieldset>
+  <legend>Темы</legend>
+<% @themes.each do |theme| %>
+  <p>
+    <%= check_box_tag "blog[taxon_ids][]", 
+                       theme.id, 
+                       @blog.new_record? ? false : @blog.taxon_ids.include?(theme.id),
+                       :id => "blog_taxon_ids_#{theme.id}" %>
+    <%= label(:blog, :taxon_ids, h(theme.name), :value => theme.id) %>
+  </p>
+<% end %>
+</fieldset>
+</div>
+<div class="splitcontentright">
+<fieldset>
+  <legend>Территории</legend>
+<% @territories.each do |territory| %>
+  <p>
+    <%= check_box_tag "blog[taxon_ids][]", 
+                       territory.id, 
+                       @blog.new_record? ? false : @blog.taxon_ids.include?(territory.id),
+                       :id => "blog_taxon_ids_#{territory.id}" %>
+    <%= label(:blog, :taxon_ids, h(territory.name), :value => territory.id) %>
+  </p>
+<% end %>
+</fieldset>
+</div>

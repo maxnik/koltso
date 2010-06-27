@@ -13,6 +13,8 @@ class BlogsController < ApplicationController
   before_filter :find_optional_project, :except => [:index, :preview, :show_by_tag, :get_tag_list]
   accept_key_auth :index
 
+  before_filter :load_territories_themes, :only => [:index, :show_by_tag, :show, :new, :edit]
+
   def index
     @blogs_pages, @blogs = paginate :blogs,
       :per_page => 10,
@@ -127,5 +129,9 @@ private
     #authorize
   rescue ActiveRecord::RecordNotFound
     render_404
+  end
+
+  def load_territories_themes
+    @territories, @themes = TaxonFamily.load_territories_themes
   end
 end
