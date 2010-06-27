@@ -20,6 +20,22 @@
 	<% end %>
 </ul>
 
+<p>
+<% if @user_themes.blank? %>
+  <strong>Пользователь еще не выбрал ни одной интересующей его темы.</strong>
+<% else %>
+  <strong>Интересные темы для пользователя</strong>: <%=h @user_themes.map {|theme| theme.name}.join('; ') %>
+<% end %>
+</p>
+<p>
+<% if @user_territories.blank? %>
+  <strong>Пользователь еще не выбрал ни одной интересующей его территории.</strong>
+<% else %>
+  <strong>Интересные территории для пользователя</strong>: <%=h @user_territories.map {|terr| terr.name}.join('; ') %>
+<% end %>
+</p>
+
+
 <% unless @memberships.empty? %>
 <h3><%=l(:label_project_plural)%></h3>
 <ul>
