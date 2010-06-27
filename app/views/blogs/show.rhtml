@@ -45,6 +45,24 @@
     <% end %>
   <% end %>
 </ul>
+
+<% unless @blog.taxon_ids.blank? %>
+  <% blog_themes = @themes.select {|theme| @blog.taxon_ids.include?(theme.id)} %>
+  <% unless blog_themes.blank? %>
+    <p>
+      <strong>Темы:</strong>
+      <%=h blog_themes.map {|theme| theme.name }.join('; ') %>
+    </p>
+  <% end %>
+  <% blog_territories = @territories.select {|terr| @blog.taxon_ids.include?(terr.id)} %>
+  <% unless blog_territories.blank? %>
+    <p>
+      <strong>Территории:</strong> 
+      <%=h blog_territories.map {|terr| terr.name}.join('; ') %>
+    </p>
+  <% end %>
+<% end %>
+
 <br />
 
 <div id="comments" style="margin-bottom:16px;">

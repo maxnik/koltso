@@ -14,6 +14,7 @@ class BlogsController < ApplicationController
   accept_key_auth :index
 
   before_filter :load_territories_themes, :only => [:index, :show_by_tag, :show, :new, :edit]
+  before_filter :find_territories_themes_family_ids, :only => [:index, :show_by_tag, :show]
 
   def index
     @blogs_pages, @blogs = paginate :blogs,
@@ -133,5 +134,10 @@ private
 
   def load_territories_themes
     @territories, @themes = TaxonFamily.load_territories_themes
+  end
+
+  def find_territories_themes_family_ids
+    @territories_family_id = @territories[0].taxon_family_id unless @territories.blank?
+    @themes_family_id = @themes[0].taxon_family_id unless @themes.blank?
   end
 end
