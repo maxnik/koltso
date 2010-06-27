@@ -15,6 +15,7 @@ require_dependency 'blog_news_custom_fields_patch'
 require_dependency 'user_patch'
 require_dependency 'my_controller_patch'
 require_dependency 'users_controller_patch'
+require_dependency 'account_controller_patch'
 require 'blog'
 
 Redmine::Plugin.register :koltso do

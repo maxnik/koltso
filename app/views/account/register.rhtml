@@ -1,9 +1,10 @@
 <h2><%=l(:label_register)%> <%=link_to l(:label_login_with_open_id_option), signin_url if Setting.openid? %></h2>
 
-<% form_tag({:action => 'register'}, :class => "tabular") do %>
+<% form_tag({:action => 'register'}) do %>
 <%= error_messages_for 'user' %>
 
-<div class="box">
+<div class="splitcontentleft">
+<div class="box tabular">
 <!--[form:user]-->
 <% if @user.auth_source_id.nil? %>
 <p><label for="user_login"><%=l(:field_login)%> <span class="required">*</span></label>
@@ -39,6 +40,28 @@
 <% end %>
 <!--[eoform:user]-->
 </div>
-
 <%= submit_tag l(:button_submit) %>
+</div>
+
+<div class="splitcontentright">
+<fieldset>
+  <legend>Темы</legend>
+<% @themes.each do |theme| %>
+  <p>
+    <%= check_box_tag "user[taxon_ids][]", theme.id, false, :id => "user_taxon_ids_#{theme.id}" %>
+    <%= label(:user, :taxon_ids, h(theme.name), :value => theme.id) %>
+  </p>
+<% end %>
+</fieldset>
+<fieldset>
+  <legend>Территории</legend>
+<% @territories.each do |territory| %>
+  <p>
+    <%= check_box_tag "user[taxon_ids][]", territory.id, false, :id => "user_taxon_ids_#{territory.id}" %>
+    <%= label(:user, :taxon_ids, h(territory.name), :value => territory.id) %>
+  </p>
+<% end %>
+</fieldset>
+</div>
+
 <% end %>
