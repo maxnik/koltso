@@ -15,9 +15,9 @@
       <p>
         <%= check_box_tag "taxon_ids[]", 
                       theme.id,
-		      @user.anonymous? ? true : @user.taxon_ids.include?(theme.id),
+		      @user.anonymous? ? false : @user.taxon_ids.include?(theme.id),
 		      :id => "taxon_ids_#{theme.id}" %>
-        <%= label(:taxon_ids, nil, h(theme.name), :value => theme.id) %>
+        <%= label(:taxon, :ids, h(theme.name), :value => theme.id) %>
       </p>
     <% end %>
     </fieldset>
@@ -27,9 +27,9 @@
       <p>
         <%= check_box_tag "taxon_ids[]", 
                       territory.id,
-		      @user.anonymous? ? true : @user.taxon_ids.include?(territory.id),
+		      @user.anonymous? ? false : @user.taxon_ids.include?(territory.id),
 		      :id => "taxon_ids_#{territory.id}" %>
-        <%= label(:taxon_ids, nil, h(territory.name), :value => territory.id) %>
+        <%= label(:taxon, :ids, h(territory.name), :value => territory.id) %>
       </p>
     <% end %>
     </fieldset>
