@@ -59,7 +59,7 @@
   <p>
     <%= check_box_tag "user[taxon_ids][]", 
                       theme.id, @user.taxon_ids.include?(theme.id), :id => "user_taxon_ids_#{theme.id}" %>
-    <%= label(:user, :taxon_ids, theme.name, :value => theme.id) %>
+    <%= label(:user, :taxon_ids, h(theme.name), :value => theme.id) %>
   </p>
 <% end %>
 </fieldset>
@@ -69,7 +69,7 @@
   <p>
     <%= check_box_tag "user[taxon_ids][]", 
                       territory.id, @user.taxon_ids.include?(territory.id), :id => "user_taxon_ids_#{territory.id}" %>
-    <%= label(:user, :taxon_ids, territory.name, :value => territory.id) %>
+    <%= label(:user, :taxon_ids, h(territory.name), :value => territory.id) %>
   </p>
 <% end %>
 </fieldset>
