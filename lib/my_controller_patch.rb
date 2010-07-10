@@ -16,9 +16,7 @@ module MyControllerPatch
     def load_territories_themes
       params[:user][:taxon_ids] ||= [] unless params[:user].nil? # if all checkboxes are unchecked
 
-      territories, themes = TaxonFamily.find_territories_themes
-      @territories = territories.taxons unless territories.nil?
-      @themes = themes.taxons unless themes.nil?
+      @territories, @themes = TaxonFamily.load_territories_themes
     end
   end
 end
