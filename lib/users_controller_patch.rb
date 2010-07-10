@@ -13,6 +13,9 @@ module UsersControllerPatch
   end
 
   module InstanceMethods
+
+    private
+    
     def load_territories_themes
       user_taxons = Taxon.find(:all, :joins => :taxonomies,
                                :conditions => {'taxonomies.resource_type' => 'Principal',

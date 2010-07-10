@@ -13,6 +13,9 @@ module MyControllerPatch
   end
 
   module InstanceMethods
+
+    private
+
     def load_territories_themes
       params[:user][:taxon_ids] ||= [] unless params[:user].nil? # if all checkboxes are unchecked
 
