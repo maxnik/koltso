@@ -22,7 +22,12 @@
         <% end %>
       </h3>
 
-      <p><%= resource.created_on %></p>
+      <p>
+        <%= resource.created_on %> 
+        <% if resource.resource_type == 'Blog' %>
+	  <%= link_to(h("#{resource.user_firstname} #{resource.user_lastname}"), user_profile_url(resource.user_id)) %>
+        <% end %>
+      </p>
 
       <% if resource.resource_type == 'Blog' %>
         <%= textilizable(resource, :full_description) %>
