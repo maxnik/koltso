@@ -36,7 +36,7 @@ class KoltsoController < ApplicationController
                   "INNER JOIN users ON users.id = blogs.author_id #{blogs_conditions})"
     users_query = "(SELECT id, created_on, '', '', " <<
                   "'users' AS table_name, 'Principal' AS resource_type, " <<
-                  "'', firstname AS user_firstname, lastname AS user_lastname " <<
+                  "0, firstname AS user_firstname, lastname AS user_lastname " <<
                   "FROM users #{users_conditions})"
     @resources = Blog.find_by_sql([blogs_query, users_query].join(' UNION ') << " ORDER BY created_on DESC")
 
