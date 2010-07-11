@@ -1,3 +1,4 @@
+<% html_title 'Лента активности' %>
 <h2>Лента активности</h2>
 
 <% if @user.anonymous? %>
@@ -6,16 +7,77 @@
   Выбираем объекты исходя из предпочтений пользователя, если он не выбрал еще тем и территорий, то выводим все
 <% end %>
 
-<% content_for :sidebar do %>
-  <% form_tag({}, :method => :get) do %>
+<% if @resources.blank? %>
+  <p><%= l(:lenta_no_resources) %></p>
+<% else %>
+  <ol>
+  <% @resources.each do |resource| %>
+    <li>
+      <h3>
+        <% if resource.resource_type == 'Principal' %>
+          <%= link_to(h("Зарегистрировался новый пользователь \"#{resource.user_firstname} #{resource.user_lastname}\""), 
+	               user_profile_url(resource.id)) %>
+        <% elsif resource.resource_type == 'Blog' %>
+          <%= link_to(h("Пост в блог \"#{resource.title}\""), blog_url(resource.id)) %>
+        <% end %>
+      </h3>
+
+      <p><%= resource.created_on %></p>
+
+      <% if resource.resource_type == 'Blog' %>
+        <%= textilizable(resource, :full_description) %>
+      <% end %>
+
+      <% resource_territories = @taxons["#{resource.resource_type}#{resource.id}"].select {|t| t.taxon_family_id == @territories_family_id } unless @taxons["#{resource.resource_type}#{resource.id}"].blank? %>
+      <% resource_themes = @taxons["#{resource.resource_type}#{resource.id}"].select {|t| t.taxon_family_id == @themes_family_id } unless @taxons["#{resource.resource_type}#{resource.id}"].blank? %>
+      <p><strong>Значимые темы: </strong>
+      <% if resource_themes.blank? %>
+        Нет
+      <% else %>
+        <%=h (resource_themes.map {|t| t.name }).join('; ') %>
+      <% end %>
+      </p>
+      <p><strong>Значимые территории: </strong>
+      <% if resource_territories.blank? %>
+        Нет
+      <% else %>
+        <%=h (resource_territories.map {|t| t.name }).join('; ') %>
+      <% end %>
+      </p>
+    </li>
+  <% end %>
+  </ol>
+<% end %>
+
+
+<% content_for :koltso do %>
+<% form_tag do %>
+  <div id="koltso_menu">
     <%= submit_tag 'Обновить', :class => 'button-small', :name => nil %>
+
+    <%= check_box_tag "taxon_mmm", 123, false, :id => "taxon_mmm_123" %>
+    <%= label(:taxon, :mmm, h('Новости'), :value => 123)%>
+
+    <%= check_box_tag "taxon_mmm", 456, false, :id => "taxon_mmm_456" %>
+    <%= label(:taxon, :mmm, h('Анонсы'), :value => 456)%>
+
+    <%= check_box_tag "taxon_mmm", 789, false, :id => "taxon_mmm_789" %>
+    <%= label(:taxon, :mmm, h('Объявления'), :value => 789)%>
+
+    <%= check_box_tag "taxon_mmm", 111, false, :id => "taxon_mmm_111" %>
+    <%= label(:taxon, :mmm, h('Статьи'), :value => 111)%>
+
+    <%= check_box_tag "taxon_mmm", 222, false, :id => "taxon_mmm_222" %>
+    <%= label(:taxon, :mmm, h('Участники'), :value => 222)%>
+  </div>
+  <div id="koltso_sidebar">    
     <fieldset>
       <legend>Темы</legend>
     <% @themes.each do |theme| %>
       <p>
         <%= check_box_tag "taxon_ids[]", 
                       theme.id,
-		      @user.anonymous? ? false : @user.taxon_ids.include?(theme.id),
+		      @taxon_ids.blank? ? (! @user.anonymous?) : @taxon_ids.include?(theme.id),
 		      :id => "taxon_ids_#{theme.id}" %>
         <%= label(:taxon, :ids, h(theme.name), :value => theme.id) %>
       </p>
@@ -27,11 +89,12 @@
       <p>
         <%= check_box_tag "taxon_ids[]", 
                       territory.id,
-		      @user.anonymous? ? false : @user.taxon_ids.include?(territory.id),
+		      @taxon_ids.blank? ? (! @user.anonymous?) : @taxon_ids.include?(territory.id),
 		      :id => "taxon_ids_#{territory.id}" %>
         <%= label(:taxon, :ids, h(territory.name), :value => territory.id) %>
       </p>
     <% end %>
     </fieldset>
-  <% end %>
+  </div>
+<% end %>
 <% end %>

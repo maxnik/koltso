@@ -18,3 +18,19 @@ div.tags a {
 
 dt.blog-post { background-image: url(../images/balloon.png); }
 dt.blog-comment { background-image: url(../images/balloons.png); }
+
+#koltso_sidebar {
+  width: 29em;
+  float: left;  
+}
+#koltso_content {
+  margin-left: 29em;
+  background-color: #fff;
+  padding: 6px 10px 10px; # from mains redmine styles
+}
+html > body #koltso_content {
+  min-height: 600px; # hack from main redmine styles
+}
+#koltso_sidebar p {
+  margin: 0.1em;
+}
