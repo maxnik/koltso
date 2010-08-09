@@ -57,9 +57,9 @@
   <legend>Темы <span class="required">*</span></legend>
 <% @themes.each do |theme| %>
   <p>
-    <%= check_box_tag "user[taxon_ids][]", 
-                      theme.id, @user.taxon_ids.include?(theme.id), :id => "user_taxon_ids_#{theme.id}" %>
-    <%= label(:user, :taxon_ids, h(theme.name), :value => theme.id) %>
+    <%= check_box_tag "user[unsaved_taxon_ids][]", 
+                      theme.id, @user.taxon_ids.include?(theme.id), :id => "user_unsaved_taxon_ids_#{theme.id}" %>
+    <%= label(:user, :unsaved_taxon_ids, h(theme.name), :value => theme.id) %>
   </p>
 <% end %>
 </fieldset>
@@ -67,9 +67,9 @@
   <legend>Территории <span class="required">*</span></legend>
 <% @territories.each do |territory| %>
   <p>
-    <%= check_box_tag "user[taxon_ids][]", 
-                      territory.id, @user.taxon_ids.include?(territory.id), :id => "user_taxon_ids_#{territory.id}" %>
-    <%= label(:user, :taxon_ids, h(territory.name), :value => territory.id) %>
+    <%= check_box_tag "user[unsaved_taxon_ids][]", 
+                   territory.id, @user.taxon_ids.include?(territory.id), :id => "user_unsaved_taxon_ids_#{territory.id}" %>
+    <%= label(:user, :unsaved_taxon_ids, h(territory.name), :value => territory.id) %>
   </p>
 <% end %>
 </fieldset>

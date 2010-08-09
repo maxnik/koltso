@@ -17,7 +17,15 @@ module AccountControllerPatch
     private
 
     def load_territories_themes
-      params[:user][:taxon_ids] ||= [] unless params[:user].nil? # if all checkboxes are unchecked
+      if params[:user]
+        params[:user][:unsaved_taxon_ids] ||= [] # if all checkboxes are unchecked
+        @unsaved_taxon_ids = params[:user][:unsaved_taxon_ids].inject(Hash.new(false)) do |ids, id|
+          ids[id.to_i] = true
+          ids
+        end
+      else
+        @unsaved_taxon_ids = Hash.new(false)
+      end
 
       @territories, @themes = TaxonFamily.load_territories_themes
     end

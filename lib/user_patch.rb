@@ -23,10 +23,16 @@ module UserPatch
 
       has_many :taxonomies, :as => :resource
       has_many :taxons, :through => :taxonomies
+
+      attr_accessor :unsaved_taxon_ids
     end
   end
 
   module InstanceMethods
+    def after_save
+      self.taxon_ids = self.unsaved_taxon_ids
+    end
+    
     def project
       nil # for acts_as_event and acts_as_activity_provider
     end
