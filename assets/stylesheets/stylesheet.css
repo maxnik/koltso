@@ -31,6 +31,6 @@ dt.blog-comment { background-image: url(../images/balloons.png); }
 html > body #koltso_content {
   min-height: 600px; # hack from main redmine styles
 }
-#koltso_sidebar p {
+fieldset.taxons p {
   margin: 0.1em;
 }

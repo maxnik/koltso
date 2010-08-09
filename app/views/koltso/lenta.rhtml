@@ -76,7 +76,7 @@
     <%= label(:taxon, :mmm, h('Участники'), :value => 222)%>
   </div>
   <div id="koltso_sidebar">    
-    <fieldset>
+    <fieldset class="taxons">
       <legend>Темы</legend>
     <% @themes.each do |theme| %>
       <p>
@@ -88,7 +88,7 @@
       </p>
     <% end %>
     </fieldset>
-    <fieldset>
+    <fieldset class="taxons">
       <legend>Территории</legend>
     <% @territories.each do |territory| %>
       <p>
