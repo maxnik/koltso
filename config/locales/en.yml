@@ -6,3 +6,5 @@ en:
   field_tag_list: Tags list
   label_tag_cloud: Tag cloud
   label_read_more: Read more...
+  lenta_no_resources: There is no objects for these themes and territories.
+  no_theme_or_territory: Select at least one theme and territory from lists.

@@ -7,6 +7,11 @@ module UserPatch
   def self.included(base)
     base.send(:include, InstanceMethods)
 
+    base.send(:include, TaxonsValidation)
+    # User class already has 'validate' method http://www.redmine.org/boards/3/topics/12401
+    base.alias_method_chain :validate, :taxons
+
+
     base.class_eval do
       acts_as_event :type => 'new-user',
                     :title => 'title',
@@ -23,7 +28,7 @@ module UserPatch
 
   module InstanceMethods
     def project
-      nil
+      nil # for acts_as_event and acts_as_activity_provider
     end
   end
 end

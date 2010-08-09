@@ -62,4 +62,9 @@ class Blog < ActiveRecord::Base
 
   has_many :taxonomies, :as => :resource
   has_many :taxons, :through => :taxonomies
+
+  # instead of simple 'validate' method I put this code here for consistency 
+  # with code in user_patch.rb and because of DRY principle
+  include TaxonsValidation
+  alias_method_chain :validate, :taxons  
 end

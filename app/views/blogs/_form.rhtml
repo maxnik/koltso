@@ -32,7 +32,7 @@
 
 <div class="splitcontentleft">
 <fieldset class="taxons">
-  <legend>Темы</legend>
+  <legend>Темы <span class="required">*</span></legend>
 <% @themes.each do |theme| %>
   <p>
     <%= check_box_tag "blog[taxon_ids][]", 
@@ -46,7 +46,7 @@
 </div>
 <div class="splitcontentright">
 <fieldset class="taxons">
-  <legend>Территории</legend>
+  <legend>Территории <span class="required">*</span></legend>
 <% @territories.each do |territory| %>
   <p>
     <%= check_box_tag "blog[taxon_ids][]", 
