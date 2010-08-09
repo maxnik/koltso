@@ -62,11 +62,13 @@ class BlogsController < ApplicationController
 
   def edit
     render_403 if User.current != @blog.author
-    if request.post? and @blog.update_attributes(params[:blog])
-      attachments = attach_files(@blog, params[:attachments])
-      flash[:notice] = l(:notice_successful_update)
+    if request.post? 
+      if @blog.update_attributes(params[:blog])
+        attachments = attach_files(@blog, params[:attachments])
+        flash[:notice] = l(:notice_successful_update)
+        redirect_to :action => 'show', :id => @blog
+      end
     end
-    redirect_to :action => 'show', :id => @blog
   end
 
   def add_comment
@@ -133,6 +135,16 @@ private
   end
 
   def load_territories_themes
+    if params[:blog]
+      params[:blog][:unsaved_taxon_ids] ||= [] # if all checkboxes are unchecked
+      @unsaved_taxon_ids = params[:blog][:unsaved_taxon_ids].inject(Hash.new(false)) do |ids, id|
+        ids[id.to_i] = true
+        ids
+      end
+    else
+      @unsaved_taxon_ids = Hash.new(false)
+    end
+
     @territories, @themes = TaxonFamily.load_territories_themes
   end
 

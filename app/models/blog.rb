@@ -67,4 +67,10 @@ class Blog < ActiveRecord::Base
   # with code in user_patch.rb and because of DRY principle
   include TaxonsValidation
   alias_method_chain :validate, :taxons  
+
+  attr_accessor :unsaved_taxon_ids
+
+  def after_save
+    self.taxon_ids = self.unsaved_taxon_ids # saving collection to database after validations checking
+  end
 end
